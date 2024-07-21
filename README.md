@@ -84,3 +84,74 @@ export class UsMapComponent implements OnInit {
     });
   }
 }```
+
+```createMap(): void {
+    const width = 960;
+    const height = 600;
+
+    const svg = d3.select('#us-map-container').append('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+    const projection = d3.geoAlbersUsa()
+      .scale(1280)
+      .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath()
+      .projection(projection);
+
+    const g = svg.append('g');
+
+    // Draw the map
+    g.selectAll('path')
+      .data(topojson.feature(usMapData, usMapData.objects.states).features)
+      .enter().append('path')
+      .attr('d', path)
+      .attr('class', 'state');
+
+    // Add buttons to the states with counts
+    g.selectAll('circle')
+      .data(topojson.feature(usMapData, usMapData.objects.states).features)
+      .enter().append('circle')
+      .attr('cx', d => path.centroid(d)[0])
+      .attr('cy', d => path.centroid(d)[1])
+      .attr('r', d => this.stateCounts[d.id] ? 10 : 0) // Adjust radius based on count
+      .attr('class', 'state-button')
+      .style('fill', 'red')
+      .on('click', d => alert(State: ${d.properties.name}, Count: ${this.stateCounts[d.id]}));
+  }
+createMap(): void {
+    const width = 960;
+    const height = 600;
+
+    const svg = d3.select('#us-map-container').append('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+    const projection = d3.geoAlbersUsa()
+      .scale(1280)
+      .translate([width / 2, height / 2]);
+
+    const path = d3.geoPath()
+      .projection(projection);
+
+    const g = svg.append('g');
+
+    // Draw the map
+    g.selectAll('path')
+      .data(topojson.feature(usMapData, usMapData.objects.states).features)
+      .enter().append('path')
+      .attr('d', path)
+      .attr('class', 'state');
+
+    // Add buttons to the states with counts
+    g.selectAll('circle')
+      .data(topojson.feature(usMapData, usMapData.objects.states).features)
+      .enter().append('circle')
+      .attr('cx', d => path.centroid(d)[0])
+      .attr('cy', d => path.centroid(d)[1])
+      .attr('r', d => this.stateCounts[d.id] ? 10 : 0) // Adjust radius based on count
+      .attr('class', 'state-button')
+      .style('fill', 'red')
+      .on('click', d => alert(State: ${d.properties.name}, Count: ${this.stateCounts[d.id]}));
+  }```
