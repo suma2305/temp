@@ -1,6 +1,4 @@
-
-```
-import { Component, AfterViewInit } from '@angular/core';
+```import { Component, AfterViewInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 
@@ -33,16 +31,18 @@ export class UsMapComponent implements AfterViewInit {
     const path = d3.geoPath().projection(projection);
 
     d3.json('https://d3js.org/us-10m.v1.json').then((us: any) => {
+      const states = topojson.feature(us, us.objects.states).features;
+
       svg.append('g')
         .selectAll('path')
-        .data(topojson.feature(us, us.objects.states).features)
+        .data(states)
         .enter().append('path')
         .attr('d', path)
         .attr('fill', '#ccc')
         .attr('stroke', '#333');
 
       svg.selectAll('g')
-        .data(topojson.feature(us, us.objects.states).features)
+        .data(states)
         .enter().append('g')
         .attr('class', 'state-button-group')
         .each((d: any) => {
