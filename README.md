@@ -1,4 +1,5 @@
-```import { Component, AfterViewInit } from '@angular/core';
+```
+import { Component, AfterViewInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 
@@ -64,4 +65,5 @@ export class UsMapComponent implements AfterViewInit {
         });
     });
   }
-}```
+}
+```
