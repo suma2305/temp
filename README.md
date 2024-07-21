@@ -1,6 +1,6 @@
 # temp
 
- svg.append('g')
+ ```svg.append('g')
         .selectAll('path')
         .data(states.features)
         .enter().append('path')
@@ -18,7 +18,7 @@
         .attr('y', (d: any) => projection(d3.geoCentroid(d))[1])
         .attr('dy', '.35em')
         .style('text-anchor', 'middle')
-        .text((d: any) => this.data[d.properties.name] ? 'Button' : '');
+        .text((d: any) => this.data[d.properties.name] ? 'Button' : '');```
 
 
 
