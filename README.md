@@ -67,3 +67,67 @@ export class UsMapComponent implements AfterViewInit {
   }
 }
 ```
+
+
+```
+import { Component, OnInit, OnChanges } from '@angular/core';
+import * as Highcharts from "highcharts/highmaps";
+import Drilldown from 'highcharts/modules/drilldown';
+Drilldown(Highcharts);
+
+declare var require: any;
+const usaMap = require("@highcharts/map-collection/countries/us/us-all.geo.json");
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent implements OnInit  {
+  Highcharts;
+    chartConstructor = "mapChart";
+    chartOptions;
+
+    constructor() { }
+
+    ngOnInit() {
+        this.Highcharts = Highcharts;
+
+        this.chartOptions = {
+            chart: {
+                map: usaMap,
+            },
+            series: [
+                {
+                    data: [{
+                        id: "us-co",
+                        drilldown: "us-co",
+                        value: 100
+                    }],
+                    mapData: usaMap,
+                    allowPointSelect: true,
+                    joinBy: ["hc-key", "id"]
+                }
+            ],
+            drilldown: {
+                series: [
+                    {
+                        name: "us-co",
+                        id: "us-co",
+                        data: [
+                           ['us-co-080', 34],
+                            ['us-co-081', 33],
+                            ['us-co-082', 33]
+                        ]
+                    }
+                ]
+            }
+        };
+    }
+
+    
+
+}
+
+
+```
