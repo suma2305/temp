@@ -321,3 +321,6 @@ export class UsMapComponent implements AfterViewInit {
   }
 }
 ```
+```
+https://github.com/jcbowyer/d3-in-angular/blob/master/src/app/unitedstates-map/unitedstates-map.component.ts
+```
